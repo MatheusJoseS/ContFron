@@ -59,7 +59,7 @@ export default function SOSconfPage() {
     <main style={{ background: '#cbb3d8' }} className="w-screen h-screen flex">
       <div style={{ background: '#d8cadb' }} className="w-1/4 h-full border-r-2 border-solid border-white">
         <a href="/home"><img src="/imagens/sete.png" alt="" className="w-20 ml-5 pt-5" /></a>
-        {diario ? <button onClick={todos} style={{ color: '#a273c6' }} className="w-full h-20 mt-10 text-white text-3xl" tabIndex={5}><strong>Editar</strong> </button> : <button className="w-full h-20 mt-10 text-white text-3xl" onClick={todos} style={{ background: '#a273c6' }} tabIndex={5}><strong>Editar</strong></button>}
+        {diario ? <button onClick={todos} style={{ color: '#a273c6' }} className="w-full h-20 mt-10 text-white text-3xl" tabIndex={5}><strong>Todos os Diario</strong> </button> : <button className="w-full h-20 mt-10 text-white text-3xl" onClick={todos} style={{ background: '#a273c6' }} tabIndex={5}><strong>Todos os Diario</strong></button>}
         {diario ? <button onClick={adicionar} className="w-full h-20 mt-10 text-white text-3xl" style={{ background: '#a273c6' }} tabIndex={6}><strong>Criar</strong></button> : <button onClick={adicionar} style={{ color: '#a273c6' }} className="w-full h-20 mt-10 text-white text-3xl" tabIndex={6}><strong>Criar</strong></button>}
       </div>
       {diario ?
@@ -88,11 +88,12 @@ export default function SOSconfPage() {
                 <div>
                   <div style={{ color: '#cbb3d8',border: "1px solid #ccc" }} className="mx-5 my-5 h-24 rounded-xl bg-white flex justify-between p-5 shadow-lg">
                     <div className="flex flex-col">
-                      <div className="text-4xl" onClick={() => router.push("/diario/" + diarios.id)}>{diarios.title}</div>
+                      <div className="text-4xl">{diarios.title}</div>
                       <div><label>Ultima Atualização:</label>{diarios.updated_at.split('T')[0].replaceAll('-', '/')}</div>
                     </div>
                     <div className="flex">
-                      <button className="px-5" onClick={() => { deletar(diarios?.id) }}><img src="/imagens/lixod.png" alt="" /></button>
+                      <button className="px-5" onClick={() => router.push("/diario/" + diarios.id)}><img src="/imagens/lapis.png" alt="" className="w-14"/></button>
+                      <button className="px-5" onClick={() => { deletar(diarios?.id) }}><img src="/imagens/lixod.png" alt="" className="w-10"/></button>
                     </div>
                   </div>
                 </div>

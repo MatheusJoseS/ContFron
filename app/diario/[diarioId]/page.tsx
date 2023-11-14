@@ -1,22 +1,18 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import api from "../../shaed/utils/my-axios";
-interface Diario {
-  title: string;
-  question1: string;
-  question2: string;
-  question3: string;
-  description: string;
-  updated_at: string;
-}
+import { log } from "console";
+
 export default function DiarioIdPage({ params }: { params: { diarioId: string } }) {
-  const [diario, setDiario] = React.useState<Diario>({ title: '', description: '', question1: '', question2: '', question3: '', updated_at: '' })
+  const [diario, setDiario] = React.useState<{title: string; description: string;question1:string;question2:string;question3:string;updated_at:string }>({ title: '', description: '', question1: '', question2: '', question3: '', updated_at: '' })
   const token = localStorage.getItem('token');
   useEffect(() => {
     info();
   }, []);
   const info = async () => {
     const response = await api.get('/diary/findDiary/' + params.diarioId)
+setDiario(response.data)
+    
   }
   const getData = (e: any) => {
     const { name, value } = e.target
@@ -34,22 +30,19 @@ export default function DiarioIdPage({ params }: { params: { diarioId: string } 
     await api.put('/diary/updateDiary/' + params.diarioId, dataFrom);
     location.href = 'http://localhost:3000/diario'
   }
+  console.log(diario);
   return (
-    <main className="w-screen h-screen  px-48 py-10">
-      <div style={{ borderRadius: '2rem', background: '#D8CADB' }} className="w-full h-full ">
-        <header className="flex justify-between">
-          <div className="flex justify-between">
-            <a href="/diario"><img src="/imagens/livro.png" alt="" className="ml-32 pt-5 w-20 h-24" /></a>
-            <h1 className="pt-11 pl-4 text-2xl text-white">Meu Diario</h1>
-          </div>
-          <div className="flex justify-between mt-11 text-2xl text-white">
-            <button onClick={atualizar} style={{ color: '#D8CADB' }} className="bg-white hover:bg-purple-200 font-bold py-1 px-2 text-lg rounded-2xl mr-20 relative -top-3">Atualizar</button>
-          </div>
+    <main className="w-screen h-screen">
+      <div style={{background: '#cbb3d8' }} className="w-full h-full">
+        <header style={{background: '#d8cadb'}} className="flex justify-between items-center">
+            <a href="/diario"><img src="/imagens/sete.png" alt="" className="pl-5 w-30 m-5 h-20" /></a>
+            <h1 className="ml-12 text-6xl text-white"><strong>Editar</strong></h1>
+            <button onClick={atualizar} style={{ color: '#D8CADB' }} className="bg-white hover:bg-purple-200 font-bold py-5 px-5 text-3xl rounded-2xl mr-5">Atualizar</button>
         </header>
-        <form className="">
+        <form className="mt-10 w-10/12 m-auto">
           <div className="text-center">
-            <label htmlFor='title' className="text-3xl text-white ">Titulo</label> <br />
-            <input className="border-b-2 w-1/2 text-white mb-5" type="text" value={diario?.title} style={{ background: '#D8CADB' }} name="title" id="title" onChange={getData} required /> <br />
+            <label htmlFor='title' className="text-3xl text-white">Titulo</label> <br />
+            <input className="border-b-2 w-1/2 text-white mb-5" type="text" value={diario?.title} style={{ background: '#cbb3d8' }} name="title" id="title" onChange={getData} required /> <br />
             <label htmlFor="description" className="text-white text-2xl w-full text-center">Descrição</label>
           </div>
           <textarea name="description" value={diario?.description} id="description" onChange={getData} rows={20} className="block p-2.5 mt-3 w-9/12 m-auto text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
