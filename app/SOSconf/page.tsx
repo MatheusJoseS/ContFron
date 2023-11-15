@@ -30,15 +30,18 @@ export default function SOSconfPage() {
   }
 
 
+
   const Submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('oi');
-    console.log(fotos);
+    console.log('teste');
+    
     if (fotos.imag) {
       const formData = new FormData();
       formData.append("file", fotos.imag);
       formData.append("description", fotos.description);
       formData.append("title", fotos.title);
+      console.log(formData);
+      
       try {
         const response = await api.post('/sos/uploadFile', formData);
         console.log(response);
@@ -46,6 +49,9 @@ export default function SOSconfPage() {
       } catch (error) {
         console.error("Error uploading image:", error);
       }
+    }else{
+      console.log('erro');
+      
     }
   }
 
@@ -60,19 +66,16 @@ export default function SOSconfPage() {
   useEffect(() => {
     info();
   }, [])
-
   const info = async () => {
     const response = await api.get('/sos/findFile')
     const data = response.data.res
-    console.log(data);
-
     setFoto(data)
-
+    console.log(foto);
+    
   }
   const deletar = async (id: string) => {
     const response = await api.delete("/sos/deleteFile/" + id)
     location.href = '/SOSconf'
-    console.log(response);
   }
   return (
     <main style={{ background: 'rgb(232, 163, 163)' }} className="w-screen h-screen flex">
