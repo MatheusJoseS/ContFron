@@ -27,7 +27,6 @@ export default function SOSconfPage() {
     admVeriv();
   }
   const mudarAnalize = () => {
-console.log(analise[0]);
     if (analise[0] === '#41a5ab') {
       const mudar = [
         '', '#75ced3'
@@ -44,7 +43,6 @@ console.log(analise[0]);
     e.preventDefault();
     const response = await api.post('/brief/createBrief', data)
     location.href = '/depoimento'
-
   }
   const getData = (e: any) => {
     const { name, value } = e.target
@@ -77,24 +75,19 @@ console.log(analise[0]);
   useEffect(() => {
     info();
   }, [])
-
   const info = async () => {
     const response = await api.get('/brief/listTrueBrief')
     const admres = await api.get('/users/pegaPorId')
-   
-    console.log(admres);
     const admdata = admres.data.saveUser.isAdmin
     if (admdata === true) {
       const admAnalize = await api.get('/brief/listFalseBrief')
       setAdm(true)
       const admava = admAnalize.data
       setDescri(admava)
-      console.log('ok');
-    }else {
+    } else {
       console.log('nada');
     }
     const data = response.data
-
     setFotos(data)
   }
   return (
@@ -108,22 +101,21 @@ console.log(analise[0]);
       <div>
         {pag ?
           <div style={{ width: '1230px' }}>
-<div style={{ overflow: "auto", height: '50em', width: '1383px' }}  className='mt-10 pr-10'>
-
-            {descri.map(descri => {
-              return (
-                <div className="ml-10 ">
-                  <div className="flex justify-between items-center mt-5">
-                      <img src="/imagens/prerfil.png" alt="" className="w-20"/>
-                    <div className="w-11/12  shadow-xl h-auto bg-white p-5 rounded-lg ml-5">
-                      <p className="text-3xl">"<strong className="text-2xl">{descri.description}</strong>"</p>
+            <div style={{ overflow: "auto", height: '50em', width: '1383px' }} className='mt-10 pr-10'>
+              {descri.map(descri => {
+                return (
+                  <div className="ml-10 ">
+                    <div className="flex justify-between items-center mt-5">
+                      <img src="/imagens/prerfil.png" alt="" className="w-20" />
+                      <div className="w-11/12  shadow-xl h-auto bg-white p-5 rounded-lg ml-5">
+                        <p className="text-3xl">"<strong className="text-2xl">{descri.description}</strong>"</p>
+                      </div>
+                      <button className="pl-5" onClick={() => Negado(descri?.id)}><img src="/imagens/negado.png" alt="" /></button><button className="pl-3" onClick={() => Aprovado(descri?.id, descri?.status)}> <img src="/imagens/aprovado.png" alt="" /> </button>
                     </div>
-                    <button className="pl-5" onClick={() => Negado(descri?.id)}><img src="/imagens/negado.png" alt="" /></button><button  className="pl-3" onClick={() => Aprovado(descri?.id, descri?.status)}> <img src="/imagens/aprovado.png" alt="" /> </button>
                   </div>
-                </div>
-              )
-            })}
-</div>
+                )
+              })}
+            </div>
           </div> :
           <div className="p-10">
             {imagen ?

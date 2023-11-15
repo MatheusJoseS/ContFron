@@ -1,6 +1,6 @@
 'use client'
 import Navbar from "../shaed/constants/navbar";
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import api from "../shaed/utils/my-axios";
 interface imag {
   user_url: string;
@@ -61,14 +61,12 @@ export default function HomePage() {
     "nada",
     "nada",
   ]
- 
   const SOSBack = () => {
     if (photos.length > 0) {
       const newIndex = (currentPhotoIndex - 1 + photos.length) % photos.length;
       setCurrentPhotoIndex(newIndex);
     }
   };
-
   const SOSNext = () => {
     if (photos.length > 0) {
       const newIndex = (currentPhotoIndex + 1) % photos.length;
@@ -79,7 +77,6 @@ export default function HomePage() {
     const num = (item - 1 + 4) % 4;
     setItem(num);
   };
-
   const mudarcaroNext = () => {
     const num = (item + 1) % 4;
     setItem(num);
@@ -92,9 +89,6 @@ export default function HomePage() {
     const nume = (items - 1) % 5;
     setItems(nume)
   }
-  console.log(currentPhotoIndex);
-  console.log(photos);
-  
   return (
     <div className="">
       <Navbar />
@@ -111,33 +105,33 @@ export default function HomePage() {
               </div>
             </header>
             <div className="flex justify-between">
-            <button onClick={madardicBack}><img src="/imagens/sete.png" alt="" className="w-20" /></button>
-              <img style={{height:'800px',width:'800px'}} src={image[items]} alt="atividade/incentivos para ajuda" className="m-auto ml-40 -mt-36 -mb-28" />
+              <button onClick={madardicBack}><img src="/imagens/sete.png" alt="" className="w-20" /></button>
+              <img style={{ height: '800px', width: '800px' }} src={image[items]} alt="atividade/incentivos para ajuda" className="m-auto ml-40 -mt-36 -mb-28" />
               <button onClick={madardicNext}><img src="/imagens/Seta esquerda.png" alt="" className="w-20" /></button>
             </div>
             <p className="text-2xl text-white text-center px-10 h-full">{texte[items]}</p>
           </div>
         </div>
         : null}
-        {SOS ? 
-      <div className="w-full h-full absolute bottom-40 px-72 py-72 z-20">
-        {photos && photos[currentPhotoIndex] && (
-      <div style={{ background: '#EC6161', borderRadius: '2rem' }} className="p-4 w-full">
-        <div className="text-right">
-            <button onClick={SOSn}><img src="/imagens/X1.png" alt="X" className="w-40"/></button>
+      {SOS ?
+        <div className="w-full h-full absolute bottom-40 px-72 py-72 z-20">
+          {photos && photos[currentPhotoIndex] && (
+            <div style={{ background: '#EC6161', borderRadius: '2rem' }} className="p-4 w-full">
+              <div className="text-right">
+                <button onClick={SOSn}><img src="/imagens/X1.png" alt="X" className="w-40" /></button>
+              </div>
+              <div className="flex justify-between">
+                <button onClick={SOSBack}><img src="/imagens/sete.png" alt="" className="w-20" /></button>
+                <div>
+                  <img style={{ height: '500px' }} src={`http://localhost:38000/images/${photos[currentPhotoIndex].user_url}`} alt="atividade/incentivos para ajuda" className="m-auto " />
+                  <p className="text-center text-white text-2xl">{photos[currentPhotoIndex].description}</p>
+                </div>
+                <button onClick={SOSNext}><img src="/imagens/Seta esquerda.png" alt="" className="w-20" /></button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="flex justify-between">
-        <button onClick={SOSBack}><img src="/imagens/sete.png" alt="" className="w-20" /></button>
-        <div>
-          <img style={{height:'500px'}} src={`http://localhost:38000/images/${photos[currentPhotoIndex].user_url}`} alt="atividade/incentivos para ajuda" className="m-auto " />
-          <p className="text-center text-white text-2xl">{photos[currentPhotoIndex].description}</p>
-        </div>
-          <button onClick={SOSNext}><img src="/imagens/Seta esquerda.png" alt="" className="w-20" /></button>
-        </div>
-      </div>
-        )}
-    </div>
-        :null}
+        : null}
       <main className="flex justify-between">
         <div className="w-1/2 ">
           <button onClick={sdica} style={{ background: '#fdbd5e', borderRadius: '2rem', marginLeft: '10rem' }} className=" h-24 w-2/3 ml-36 mt-16 p-9 flex justify-between" tabIndex={7}><img src="/imagens/lanpada.png" alt="Imagen do Dicas" className="w-40 h-20 -ml-7 -mt-7" /> <strong className="mr-80 pr-1 text-white text-3xl">Dicas</strong></button>
@@ -153,7 +147,7 @@ export default function HomePage() {
           <button onClick={mudarcaroBack} className="mt-80 w-20 h-20 text-white text-xl" ><img src="/imagens/seta-direita.png" alt="" className="w-10 m-auto" /></button>
         </div>
       </main>
-        <button onClick={SOSs} style={{ background: '#EC6161'}} className="float-right text-white w-20 h-20 rounded-full mr-5 mt-10">SOS</button>
+      <button onClick={SOSs} style={{ background: '#EC6161' }} className="float-right text-white w-20 h-20 rounded-full mr-5 mt-10">SOS</button>
     </div>
   )
 }

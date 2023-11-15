@@ -16,7 +16,6 @@ export default function Navbar() {
   const genericHamburgerLine = `h-2 w-12 my-1 rounded-full bg-white transition ease transform duration-300`;
   const [perfil, setPerfil] = useState(false)
   const [from, setFrom] = React.useState<{ senhaAT: string, senhaAL: string, senhaCO: string }>({ senhaAT: '', senhaAL: '', senhaCO: '' })
-
   const alterarPerfils = () => {
     setPerfil(!perfil)
   }
@@ -30,13 +29,10 @@ export default function Navbar() {
   useEffect(() => {
     info();
   }, []);
-
   const info = async () => {
     try {
       const response = await api.get('/users/pegaPorId');
       const data = response.data.saveUser;
-      console.log(data);
-
       if (data) {
         setShow(data);
       } else {
@@ -49,10 +45,9 @@ export default function Navbar() {
   const getData = (e: any) => {
     const { name, value } = e.target
     setFrom({ ...from, [name]: value })
-
   }
   const sobreToken = () => {
-    location.href ='/sobreToken'
+    location.href = '/sobreToken'
   }
   const alterarPerfil = async () => {
     const data = {
@@ -67,12 +62,10 @@ export default function Navbar() {
     } else {
       alert('Comfirmar senha esta errado')
     }
-
-
   }
-const alterarPerfilsN = ()=>{
-  setPerfil(false)
-}
+  const alterarPerfilsN = () => {
+    setPerfil(false)
+  }
   return (
     <nav style={{ background: cor }} className="w-full h-24 flex justify-between">
       <div className="flex justify-between">

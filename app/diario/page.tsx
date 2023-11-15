@@ -37,14 +37,13 @@ export default function SOSconfPage() {
     const response = await api.post('/diary/createDiary', dataFrom);
     location.href = 'http://localhost:3000/diario'
   }
-  const deletar = async (id:string) => {
+  const deletar = async (id: string) => {
     const response = await api.delete('/diary/deleteDiary/' + id);
     location.href = 'http://localhost:3000/diario'
   }
   useEffect(() => {
     info();
   }, []);
-
   const info = async () => {
     try {
       const response = await api.get('/diary/listDiaryByUserId');
@@ -54,7 +53,6 @@ export default function SOSconfPage() {
       console.error("Ocorreu um erro ao buscar os dados: " + error);
     }
   }
-  
   return (
     <main style={{ background: '#cbb3d8' }} className="w-screen h-screen flex">
       <div style={{ background: '#d8cadb' }} className="w-1/4 h-full border-r-2 border-solid border-white">
@@ -86,14 +84,14 @@ export default function SOSconfPage() {
             {diarios.map(diarios => {
               return (
                 <div>
-                  <div style={{ color: '#cbb3d8',border: "1px solid #ccc" }} className="mx-5 my-5 h-24 rounded-xl bg-white flex justify-between p-5 shadow-lg">
+                  <div style={{ color: '#cbb3d8', border: "1px solid #ccc" }} className="mx-5 my-5 h-24 rounded-xl bg-white flex justify-between p-5 shadow-lg">
                     <div className="flex flex-col">
                       <div className="text-4xl">{diarios.title}</div>
                       <div><label>Ultima Atualização:</label>{diarios.updated_at.split('T')[0].replaceAll('-', '/')}</div>
                     </div>
                     <div className="flex">
-                      <button className="px-5" onClick={() => router.push("/diario/" + diarios.id)}><img src="/imagens/lapis.png" alt="" className="w-10"/></button>
-                      <button className="px-5" onClick={() => { deletar(diarios?.id) }}><img src="/imagens/lixod.png" alt="" className="w-10"/></button>
+                      <button className="px-5" onClick={() => router.push("/diario/" + diarios.id)}><img src="/imagens/lapis.png" alt="" className="w-10" /></button>
+                      <button className="px-5" onClick={() => { deletar(diarios?.id) }}><img src="/imagens/lixod.png" alt="" className="w-10" /></button>
                     </div>
                   </div>
                 </div>

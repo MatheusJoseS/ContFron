@@ -24,37 +24,27 @@ export default function SOSconfPage() {
     const file = e.target.files?.[0];
     setFotos((prevFoto) => ({ ...prevFoto, imag: file }));
   }
-
   const DescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFotos((prevFoto) => ({ ...prevFoto, description: e.target.value }));
   }
-
-
-
   const Submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('teste');
-    
     if (fotos.imag) {
       const formData = new FormData();
       formData.append("file", fotos.imag);
       formData.append("description", fotos.description);
       formData.append("title", fotos.title);
-      console.log(formData);
-      
       try {
         const response = await api.post('/sos/uploadFile', formData);
-        console.log(response);
         location.href = 'http://localhost:3000/SOSconf';
       } catch (error) {
         console.error("Error uploading image:", error);
       }
-    }else{
+    } else {
       console.log('erro');
-      
+
     }
   }
-
   const login = () => {
     const novoestado = false;
     setImagen(novoestado)
@@ -70,8 +60,6 @@ export default function SOSconfPage() {
     const response = await api.get('/sos/findFile')
     const data = response.data.res
     setFoto(data)
-    console.log(foto);
-    
   }
   const deletar = async (id: string) => {
     const response = await api.delete("/sos/deleteFile/" + id)
@@ -89,7 +77,7 @@ export default function SOSconfPage() {
           <h1 className="text-white text-5xl mt-5 text-center">Cont;nue</h1>
           <form onSubmit={Submit} className="p-5">
             <div className="flex items-center justify-center">
-            <input type="text" name="title" id="title" placeholder="Titulo:" style={{ background: 'rgb(232, 163, 163)' }} onChange={TitleChange} className='placeholder:text-white text-3xl w-1/2 flex items-center justify-center text-white' maxLength={45} />
+              <input type="text" name="title" id="title" placeholder="Titulo:" style={{ background: 'rgb(232, 163, 163)' }} onChange={TitleChange} className='placeholder:text-white text-3xl w-1/2 flex items-center justify-center text-white' maxLength={45} />
             </div>
             <div className="flex items-center justify-center w-full">
               <label form="dropzone-file" className="flex flex-col items-center justify-center w-1/2 h-80 mt-3 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
@@ -107,7 +95,7 @@ export default function SOSconfPage() {
               <label htmlFor="description" className="text-right text-white text-3xl">Decrição</label>
             </div>
             <div className="flex items-center justify-center">
-            <textarea name="description" id="description" onChange={DescriptionChange} maxLength={400} rows={10} className='w-1/2' />
+              <textarea name="description" id="description" onChange={DescriptionChange} maxLength={400} rows={10} className='w-1/2' />
             </div>
             <button className="text-white float-right mr-20 flex justify-between items-center p-2 rounded-xl mt-16 w-32 text-2xl h-12" type="submit" style={{ background: '#ec6161' }}>Enviar <img src="/imagens/salvar.png" alt="" /></button>
           </form>

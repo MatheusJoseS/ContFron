@@ -18,10 +18,8 @@ export default function SobrePage() {
             <strong>
               Sobre a Cont;nue: Promovendo o Bem-Estar Emocional
               Olá, somos a Cont;nue, uma plataforma dedicada ao seu bem-estar emocional! Fundada com paixão e comprometimento, nossa missão é auxiliar você a encontrar equilíbrio e serenidade na vida cotidiana, fornecendo ferramentas e recursos inovadores para melhorar sua saúde mental.
-
               Nosso Propósito:
               Na Cont;nue, acreditamos que a saúde mental é fundamental para uma vida plena e significativa. Nosso projeto de conclusão de curso, realizado na FIEC em 2023, é o resultado do nosso compromisso em criar um espaço digital acolhedor, onde você pode encontrar apoio, compreensão e orientação.
-
               O que Oferecemos
               Explore uma variedade de recursos cuidadosamente elaborados para atender às suas necessidades emocionais. Desde exercícios de respiração até diários, nossa plataforma oferece ferramentas práticas para ajudá-lo a gerenciar o estresse, cultivar a positividade e fortalecer sua resiliência emocional.          </strong>
           </p>

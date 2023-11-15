@@ -6,7 +6,7 @@ export default function SobreTokenPage() {
   const [cor, setCor] = React.useState("#717EC7")
   return (
     <div style={{ backgroundColor: '#F7F4FF' }} className="w-screen h-screen">
-      <header style={{background:'#717ec7'}} className="w-full h-20">
+      <header style={{ background: '#717ec7' }} className="w-full h-20">
         <div className="flex">
           <a href="/home"><img src="/imagens/sete.png" alt="" className="w-14 h-16 ml-5 pt-3 flex-initial" /></a>
           <h1 className="text-white flex-initial text-5xl ml-3 mt-4">Sobre</h1>
