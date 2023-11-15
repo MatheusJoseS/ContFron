@@ -147,7 +147,7 @@ export default function HomePage() {
           <button onClick={mudarcaroBack} className="mt-80 w-20 h-20 text-white text-xl" ><img src="/imagens/seta-direita.png" alt="" className="w-10 m-auto" /></button>
         </div>
       </main>
-      <button onClick={SOSs} style={{ background: '#EC6161' }} className="float-right text-white w-20 h-20 rounded-full mr-5 mt-10">SOS</button>
+      <button onClick={SOSs} style={{ background: '#EC6161' }} className="float-right text-white w-20 h-20 rounded-full text-3xl mr-5 mt-10">SOS</button>
     </div>
   )
 }
