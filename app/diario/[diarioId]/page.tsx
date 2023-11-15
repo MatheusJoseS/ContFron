@@ -4,15 +4,15 @@ import api from "../../shaed/utils/my-axios";
 import { log } from "console";
 
 export default function DiarioIdPage({ params }: { params: { diarioId: string } }) {
-  const [diario, setDiario] = React.useState<{title: string; description: string;question1:string;question2:string;question3:string;updated_at:string }>({ title: '', description: '', question1: '', question2: '', question3: '', updated_at: '' })
+  const [diario, setDiario] = React.useState<{ title: string; description: string; question1: string; question2: string; question3: string; updated_at: string }>({ title: '', description: '', question1: '', question2: '', question3: '', updated_at: '' })
   const token = localStorage.getItem('token');
   useEffect(() => {
     info();
   }, []);
   const info = async () => {
     const response = await api.get('/diary/findDiary/' + params.diarioId)
-setDiario(response.data)
-    
+    setDiario(response.data)
+
   }
   const getData = (e: any) => {
     const { name, value } = e.target
@@ -30,32 +30,30 @@ setDiario(response.data)
     await api.put('/diary/updateDiary/' + params.diarioId, dataFrom);
     location.href = 'http://localhost:3000/diario'
   }
+  const diariopag = () => {
+    location.href = '/diario'
+  }
   console.log(diario);
   return (
-    <main className="w-screen h-screen">
-      <div style={{background: '#cbb3d8' }} className="w-full h-full">
-        <header style={{background: '#d8cadb'}} className="flex justify-between items-center">
-            <a href="/diario"><img src="/imagens/sete.png" alt="" className="pl-5 w-30 m-5 h-20" /></a>
-            <h1 className="ml-12 text-6xl text-white"><strong>Editar</strong></h1>
-            <button onClick={atualizar} style={{ color: '#D8CADB' }} className="bg-white hover:bg-purple-200 font-bold py-5 px-5 text-3xl rounded-2xl mr-5">Atualizar</button>
-        </header>
-        <form className="mt-10 w-10/12 m-auto">
-          <div className="text-center">
-            <label htmlFor='title' className="text-3xl text-white">Titulo</label> <br />
-            <input className="border-b-2 w-1/2 text-white mb-5" type="text" value={diario?.title} style={{ background: '#cbb3d8' }} name="title" id="title" onChange={getData} required /> <br />
-            <label htmlFor="description" className="text-white text-2xl w-full text-center">Descrição</label>
-          </div>
-          <textarea name="description" value={diario?.description} id="description" onChange={getData} rows={20} className="block p-2.5 mt-3 w-9/12 m-auto text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
-          <label htmlFor="question1" className="block mb-2 mt-2 ml-48 text-sm font-medium text-gray-900 dark:text-white">Quais sentimentos emergiram enquanto você anotava no diário?</label>
-          <textarea name="question1" id="question1" value={diario?.question1} onChange={getData} rows={1} className="block p-2.5 w-9/12 m-auto text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escreva aqui"></textarea>
-          <label htmlFor="question2" className="block mb-2 ml-48 text-sm font-medium text-gray-900 dark:text-white">Quais de minhas crenças e valores emergiram durante a anotação do diário?</label>
-          <textarea name="question2" id="question2" value={diario?.question2} onChange={getData} rows={1} className="block p-2.5 w-9/12 m-auto text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escreva aqui"></textarea>
-          <label htmlFor="question3" className="block mb-2 ml-48 text-sm font-medium text-gray-900 dark:text-white">Como esta pagina do diário vai direcionar as minhas ações?</label>
-          <textarea name="question3" id="question3" value={diario?.question3} onChange={getData} rows={1} className="block p-2.5 w-9/12 m-auto text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Escreva aqui"></textarea>
-        </form>
+    <main style={{ background: '#cbb3d8' }} className="w-screen h-screen flex">
+      <div style={{ background: '#d8cadb' }} className="w-1/4 h-full border-r-2 border-solid border-white">
+        <a href="/home"><img src="/imagens/sete.png" alt="" className="w-20 ml-5 pt-5" /></a>
+        <button onClick={diariopag} style={{ color: '#a273c6' }} className="w-full h-20 mt-10 text-white text-3xl" tabIndex={5}><strong>Todos os Diario</strong> </button>
+        <button className="w-full h-20 mt-10 text-white text-3xl" style={{ background: '#a273c6' }} tabIndex={6}><strong>Editar</strong></button>
       </div>
-      <main>
-      </main>
-    </main>
+      <div className="w-full h-full">
+          <div className="flex justify-between items-center ml-40">
+            <h1 className="text-white text-5xl mt-5 flex m-auto">Cont;nue</h1>
+            <button onClick={atualizar} style={{ background: '#a273c6' }} className=" text-white float-right mr-20 flex justify-between items-center p-2 rounded-xl mt-6 w-40 text-2xl h-12 "> atualizar <img src="/imagens/salvar.png" alt="" /></button>
+          </div>
+          <form className="mx-40 p-5 mt-3">
+            <input className="text-4xl border-b-2 w-full h-20 rounded-lg pl-4 text-gray-500 mb-3 placeholder:text-4xl placeholder:text" value={diario?.title} placeholder="Titulo" type="text" name="title" id="title" onChange={getData} maxLength={55} /> <br />
+            <textarea className="text-4xl border-b-2 w-full rounded-lg p-5 text-gray-500 mb-3 placeholder:text-4xl placeholder:text" value={diario?.description} placeholder="Seu pensamento..." name="description" id="description" onChange={getData} rows={8} ></textarea>
+            <input className="text-2xl border-b-2 w-full h-20 rounded-lg pl-4 text-gray-500 mb-3 placeholder:text-2xl placeholder:text" value={diario?.question1} name="question1" id="question1" onChange={getData} placeholder="Quais sentimentos emergiram enquanto você anotava no diário?" />
+            <input className="text-2xl border-b-2 w-full h-20 rounded-lg pl-4 text-gray-500 mb-3 placeholder:text-2xl  placeholder:text" value={diario?.question2} name="question2" id="question2" onChange={getData} placeholder="Quais de minhas crenças e valores emergiram durante a anotação do diário?" />
+            <input className="text-2xl border-b-2 w-full h-20 rounded-lg pl-4 text-gray-500 mb-3 placeholder:text-2xl  placeholder:text" value={diario?.question3} name="question3" id="question3" onChange={getData} placeholder="Como esta pagina do diário vai direcionar as minhas ações?" />
+          </form>
+        </div>
+    </main >
   )
 }

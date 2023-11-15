@@ -92,7 +92,7 @@ export default function SOSconfPage() {
                       <div><label>Ultima Atualização:</label>{diarios.updated_at.split('T')[0].replaceAll('-', '/')}</div>
                     </div>
                     <div className="flex">
-                      <button className="px-5" onClick={() => router.push("/diario/" + diarios.id)}><img src="/imagens/lapis.png" alt="" className="w-14"/></button>
+                      <button className="px-5" onClick={() => router.push("/diario/" + diarios.id)}><img src="/imagens/lapis.png" alt="" className="w-10"/></button>
                       <button className="px-5" onClick={() => { deletar(diarios?.id) }}><img src="/imagens/lixod.png" alt="" className="w-10"/></button>
                     </div>
                   </div>
