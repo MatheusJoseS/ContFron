@@ -21,24 +21,24 @@ export default function Login() {
   const [cor, setCor] = React.useState("#1E3A8A")
   const [erro, setErro] = React.useState('')
   const googleLogoUrl = "https://cdn-icons-png.flaticon.com/512/281/281764.png?w=740&t=st=1691100843~exp=1691101443~hmac=a30f55d5ff66b960de01a09d3cc7882cd6fd49341fdc97cfb099ed6a7bcde8a9"
-  const session = await getServerSession(authOpitions)
-  const { fcmToken, notificationPermissionSattus } = useFcmToken();
-  fcmToken && console.log('FCM token:', fcmToken);
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const messaging = getMessaging(firebaseApp);
-      const unsubscribe = onMessage(messaging, (payload) => {
-        console.log('Foreground puch notification received:', payload);
-        setGoo({ 'title': payload.notification?.title || '', 'body': payload.notification?.body })
-      });
-      return () => {
-        unsubscribe();
-      }
-    }
-  })
+  // const session = await getServerSession(authOpitions)
+  // const { fcmToken, notificationPermissionSattus } = useFcmToken();
+  // fcmToken && console.log('FCM token:', fcmToken);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+  //     const messaging = getMessaging(firebaseApp);
+  //     const unsubscribe = onMessage(messaging, (payload) => {
+  //       console.log('Foreground puch notification received:', payload);
+  //       setGoo({ 'title': payload.notification?.title || '', 'body': payload.notification?.body })
+  //     });
+  //     return () => {
+  //       unsubscribe();
+  //     }
+  //   }
+  // })
   const mudanca = () => {
     limpar();
-    cadastro();
+    LoginCadastro();
   }
   const limpar = () => {
     const nada = {
@@ -54,7 +54,7 @@ export default function Login() {
     setFrom(novoEstado);
   }
 
-  const cadastro = () => {
+  const LoginCadastro = () => {
     setecadastro(!ecadastro)
   }
   const getData = (e: any) => {
@@ -70,21 +70,29 @@ export default function Login() {
     setErro(eroo)
   }
   const submit = async (e: any) => {
+    console.log(from+'mempmp');
+    
     try {
       setLoading(true);
       e.preventDefault()
       if (from.senha_user_comfir == '') {
+        console.log('login');
+        
         const login = {
           email: from.email_user,
           password: from.senha_user
         }
         const response = await api.post("/auth/login", login)
+        console.log(response);
+        
         localStorage.setItem("token", response.data.token)
         location.href = "http://localhost:3000/home"
         setLoading(false)
       } else {
         if (from.senha_user == from.senha_user_comfir) {
+
           const response = await api.post("/auth/sign-up", from)
+          console.log(response);
           alert("cadastro:ok")
           setLoading(false)
         } else {
@@ -148,7 +156,7 @@ export default function Login() {
           </div>
         </div>
         <div className='px-28 pb-6 pt-5 text-center'>
-          {ecadastro ? <button className="text-3xl bg-white w-80 hover:bg-blue-200 text-blue-500 font-bold py-2 px-4 rounded-full" tabIndex={6} onClick={cadastro}>Login</button> : <button onClick={cadastro} className="text-3xl bg-white w-80 hover:bg-blue-200 text-blue-500 font-bold py-2 px-4 rounded-full" tabIndex={6}>Cadastro</button>}
+          {ecadastro ? <button className="text-3xl bg-white w-80 hover:bg-blue-200 text-blue-500 font-bold py-2 px-4 rounded-full" tabIndex={6} onClick={mudanca}>Login</button> : <button onClick={mudanca} className="text-3xl bg-white w-80 hover:bg-blue-200 text-blue-500 font-bold py-2 px-4 rounded-full" tabIndex={6}>Cadastro</button>}
         </div>
         <h1 tabIndex={19} style={{ color: "#3D50B6" }} className='text-4xl underline text-center mt-6'><a href="/sobre"><strong> Sobre</strong></a></h1>
       </div>
