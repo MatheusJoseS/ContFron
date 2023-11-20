@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import Image from '@/node_modules/next/image'
-import axios from '@/node_modules/axios/index'
+import { signIn, signOut } from "next-auth/react";
+
 import api from './shaed/utils/my-axios'
 import useFcmToken from '@/utils/useFcmToken'
 import firebaseApp from '@/utils/firebase'
@@ -139,7 +139,7 @@ export default function Login() {
                   {ecadastro ? null :
                     <div>
                       <p tabIndex={17} className='text-blue-700 text-5xl font-black text-center mt-5 mb-5'>ou</p>
-                      <button type='submit' className='text-2xl hover:bg-slate-200 bg-white w-full h-20 rounded-xl' tabIndex={18}><img src={googleLogoUrl} alt="Logo do google" className='w-12 relative top-4 left-3' /><div className='relative bottom-5'>Entrar com google</div></button>
+                      <button onClick={() => signIn("google")} type='submit' className='text-2xl hover:bg-slate-200 bg-white w-full h-20 rounded-xl' tabIndex={18}><img src={googleLogoUrl} alt="Logo do google" className='w-12 relative top-4 left-3' /><div className='relative bottom-5'>Entrar com google</div></button>
                     </div>
                   }
                 </div>
