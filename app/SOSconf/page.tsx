@@ -92,7 +92,7 @@ export default function SOSconfPage() {
               </label>
             </div>
             <div className='ml-80 pl-8 mt-5 mb-3'>
-              <label htmlFor="description" className="text-right text-white text-3xl">Decrição</label>
+              <label htmlFor="description" className="text-right text-white text-3xl">Descrição</label>
             </div>
             <div className="flex items-center justify-center">
               <textarea name="description" id="description" onChange={DescriptionChange} maxLength={400} rows={10} className='w-1/2' />

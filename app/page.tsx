@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { signIn, signOut } from "next-auth/react";
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import api from './shaed/utils/my-axios'
 import useFcmToken from '@/utils/useFcmToken'
 import firebaseApp from '@/utils/firebase'
@@ -21,21 +21,6 @@ export default function Login() {
   const [cor, setCor] = React.useState("#1E3A8A")
   const [erro, setErro] = React.useState('')
   const googleLogoUrl = "https://cdn-icons-png.flaticon.com/512/281/281764.png?w=740&t=st=1691100843~exp=1691101443~hmac=a30f55d5ff66b960de01a09d3cc7882cd6fd49341fdc97cfb099ed6a7bcde8a9"
-  // const session = await getServerSession(authOpitions)
-  // const { fcmToken, notificationPermissionSattus } = useFcmToken();
-  // fcmToken && console.log('FCM token:', fcmToken);
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  //     const messaging = getMessaging(firebaseApp);
-  //     const unsubscribe = onMessage(messaging, (payload) => {
-  //       console.log('Foreground puch notification received:', payload);
-  //       setGoo({ 'title': payload.notification?.title || '', 'body': payload.notification?.body })
-  //     });
-  //     return () => {
-  //       unsubscribe();
-  //     }
-  //   }
-  // })
   const mudanca = () => {
     limpar();
     LoginCadastro();
@@ -105,6 +90,7 @@ export default function Login() {
     }
   }
   return (
+    <GoogleOAuthProvider clientId="571181289247-aleg0la7647vk5eslltn5qskg54kth9j.apps.googleusercontent.com">
     <main style={{ background: "#717EC7" }} className='flex justify-between p-12 w-screen h-screen'>
       <img src="/imagens/imagem3.png" alt="C do cont;nue" tabIndex={20} />
       <div className='mr-28 -mt-10'>
@@ -147,7 +133,17 @@ export default function Login() {
                   {ecadastro ? null :
                     <div>
                       <p tabIndex={17} className='text-blue-700 text-5xl font-black text-center mt-5 mb-5'>ou</p>
-                      <button onClick={() => signIn("google")} type='submit' className='text-2xl hover:bg-slate-200 bg-white w-full h-20 rounded-xl' tabIndex={18}><img src={googleLogoUrl} alt="Logo do google" className='w-12 relative top-4 left-3' /><div className='relative bottom-5'>Entrar com google</div></button>
+                      <GoogleLogin
+                        onSuccess={credentialResponse => {
+                          if (condition) {
+                            
+                          }
+                        const response = api.post('')
+                        }}
+                        onError={() => {
+                          console.log('Login Failed');
+                        }}
+                      />
                     </div>
                   }
                 </div>
@@ -179,5 +175,6 @@ export default function Login() {
         </div>
       }
     </main>
+    </GoogleOAuthProvider>
   )
 }
